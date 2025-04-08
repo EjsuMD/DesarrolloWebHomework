@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MUNDIAL RUSIA 2018</title>
     <link rel="stylesheet" href="design/index.css">
+    <link rel="stylesheet" href="design/ciudad.css">
 </head>
 <body>
 
@@ -20,7 +21,7 @@
             <ul>
                 <li><a href="index.html">inicio</a></li>
                 <li><a href="partidos.html">partidos</a></li>
-                <li><a href="anfitrion.html">Anfitrion</a></li>
+                <li><a href="anfitrion.html">Anfitrión</a></li>
                 <li><a href="grupos.html">grupos</a></li>
                 <li><a href="ciudad.html">Ciudad</a></li>
                 <li><a href="contacto.html">contacto</a></li>
@@ -28,14 +29,66 @@
         </nav>
     </div>
 
-    <div class="home">
+    <div class="home, main">
 
         <h1>CIUDADES</h1>
 
         <p>En el video de Rusia 2018 podremos ver las ciudades, estadios y los jugadores</p>
 
-        <video class="img_mundial" src="img/video.mp4" autoplay controls loop poster="img/video.jpg"></video>
+        <!-- Hay que ver cómo desactivar todos los botones del reproductor salvo el volumen -->
+        <video id="miVideo" class="img_mundial" src="img/video.mp4" autoplay muted loop poster="img/video.jpg"></video>
         <p> Shakira realiza una canción para este mundial nuevamente.</p>
+
+        <!-- TESTING -->
+            <!-- Todo esto se puede comentar o borrar junto, no debería afectar nada más. -->
+            
+            <!-- Esto fue parcialmente generado por IA. No tengo idea de qué es exactamente element.getBoundingClientRect() más allá de que es un rectángulo DEPENDIENTE DE LA PANTALLA. #FIXME! -->
+            <div id="volumenControl">
+                <!-- Acá todo esto se haría invisible, se reemplaza por un ícono de "volumen" que dispare el checkbox o hacer la imagen clickeable y que dispare una variable - detalles de implementación - y el div contenedor se hace semi-transparente para que el video playback no lo esconda. Puntos extra si se puede hacer que el volumen sólo se vea al mover el mouse por encima del reproductor. Esto se escapa MUCHO de los requisitos mínimos. No hacer si no es necesario, todo esto se puede deshacer con borrar esto y agregar "controls" a la etiqueta video. -->
+                <label for="volumen">Volumen (PLACEHOLDER)</label>
+                <input type="checkbox" id="volumen" name="isNotMuted">
+            </div>
+            <style>
+                #volumenControl {
+                position: absolute;
+                }
+
+                #volumen {
+                width: 2em;
+                }
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    
+                    document.getElementById('volumen').addEventListener('input', function() {
+                        document.getElementById('miVideo').muted = !this.checked;
+                    });
+                    
+                    const video = document.getElementById('miVideo');
+                    const volumenControl = document.getElementById('volumenControl');
+                    
+                    const videoRect = video.getBoundingClientRect();
+                    // console.log(videoRect);  Esto era sólo para leer en consola cómo se afectaba el rectángulo según la pantalla, pero estos valores se usan. DoNotDelete. (A menos que haya una solución mejor.)
+                    const volumenControlWidth = volumenControl.offsetWidth;
+                    const volumenControlHeight = volumenControl.offsetHeight;
+
+                    // A resumen, se obtiene la posición en pantalla del reproductor, y se ubica el control de volumen en esa posición (restando el espacio que debería ocupar el control) mediante estilo de posición absoluta. (Hay que ver si se lo puede hacer directamente padre e hijo, cosa que podríamos ponerlo un poco arriba, el video.style.width - volumenControl.style.width a la derecha y... Done? Todo es mejor que posición absoluta en base a la pantalla.)
+
+                    // Esta sección es sólo un verificador HORRIBLE que asegura que el control de volumen no se salga de la pantalla. Si se sale, se coloca en el principio DE LA PÁGINA.
+                    if (videoRect.right - volumenControlWidth < 0) {
+                        volumenControl.style.left = '0px';
+                    } else {
+                        volumenControl.style.left = `${videoRect.right - volumenControlWidth}px`;
+                    }
+
+                    if (videoRect.bottom - volumenControlHeight < 0) {
+                        volumenControl.style.top = '0px';
+                    } else {
+                        volumenControl.style.top = `${videoRect.bottom - volumenControlHeight}px`;
+                    }
+                })
+            </script>
+        <!-- TESTING -->
 
 
     </div>
