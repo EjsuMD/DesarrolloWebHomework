@@ -1,0 +1,12 @@
+.post {
+    text-align: justify;
+    padding: 0em 2em 1em;
+}
+
+.half-box {
+    width: 50%;
+}
+
+.mascot {
+    display: flex;
+}
