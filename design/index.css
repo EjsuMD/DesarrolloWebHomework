@@ -33,8 +33,6 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    
     width: 100%;
     margin: 0 auto;
     text-transform: uppercase;
@@ -76,9 +74,10 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.home img {
+.home img, .main img {
     border-radius: 10px;
     height: auto;
+    width: -webkit-fill-available;
 }
 
 footer {
