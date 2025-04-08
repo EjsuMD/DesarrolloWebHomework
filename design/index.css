@@ -139,7 +139,7 @@ h1 {
 .menu-mundial a:hover {
     color: #ffcc00;
 }
-.home {
+.home, .anfitrion, .partidos, .grupos, .ciudad, .contacto {
 
     display: flex;
     flex-direction: column;
